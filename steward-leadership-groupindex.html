@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Steward Leadership Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D2545;
+    --navy-deep: #081829;
+    --navy-mid: #163557;
+    --gold: #B8942A;
+    --gold-light: #D4AE4E;
+    --gold-pale: #F0DFA0;
+    --cream: #F5F0E8;
+    --cream-dark: #EDE5D4;
+    --green: #1A5C3A;
+    --green-light: #2A7A50;
+    --charcoal: #2C2C2A;
+    --text-light: #F5F0E8;
+    --text-muted: #9BA8B8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--navy-deep);
+    color: var(--text-light);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: rgba(8, 24, 41, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(184,148,42,0.15);
+    transition: all 0.3s;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 600; letter-spacing: 0.08em;
+    color: var(--cream); text-decoration: none;
+    display: flex; flex-direction: column; line-height: 1.15;
+  }
+  .nav-logo span { color: var(--gold); font-size: 0.65rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; font-family: 'Outfit', sans-serif; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.82rem; font-weight: 400; letter-spacing: 0.04em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-cta {
+    background: var(--gold); color: var(--navy-deep);
+    padding: 0.6rem 1.5rem; border-radius: 2px;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; transition: background 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid; place-items: center;
+    position: relative; overflow: hidden;
+    background: linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 60%, var(--navy-mid) 100%);
+    padding: 8rem 4rem 5rem;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-accent {
+    position: absolute; top: 0; right: 0;
+    width: 45%; height: 100%;
+    background: linear-gradient(180deg, rgba(184,148,42,0.06) 0%, transparent 60%);
+    clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+  .hero-line {
+    position: absolute; left: 4rem; top: 50%;
+    width: 1px; height: 200px; transform: translateY(-50%);
+    background: linear-gradient(180deg, transparent, var(--gold), transparent);
+    opacity: 0.4;
+  }
+  .hero-content {
+    position: relative; max-width: 900px;
+    display: flex; flex-direction: column; gap: 2rem;
+    animation: fadeUp 1s ease both;
+  }
+  .hero-eyebrow {
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--gold); display: flex; align-items: center; gap: 1rem;
+  }
+  .hero-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--gold); }
+  .hero-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 600; line-height: 1.05;
+    color: var(--cream);
+  }
+  .hero-headline em { color: var(--gold); font-style: italic; }
+  .hero-subhead {
+    font-size: 1.1rem; font-weight: 300; line-height: 1.75;
+    color: var(--text-muted); max-width: 580px;
+  }
+  .hero-phrase {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; font-style: italic; color: var(--gold-light);
+    border-left: 2px solid var(--gold); padding-left: 1.25rem;
+    opacity: 0.9;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold); color: var(--navy-deep);
+    padding: 0.9rem 2.25rem; border-radius: 2px;
+    font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.2s; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(184,148,42,0.3); }
+  .btn-outline {
+    border: 1px solid rgba(184,148,42,0.4); color: var(--cream);
+    padding: 0.9rem 2.25rem; border-radius: 2px;
+    font-size: 0.85rem; font-weight: 400; letter-spacing: 0.06em;
+    text-decoration: none; transition: all 0.2s; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold-light); transform: translateY(-2px); }
+  .hero-stats {
+    display: flex; gap: 3rem; padding-top: 1rem;
+    border-top: 1px solid rgba(184,148,42,0.15);
+  }
+  .stat-item { display: flex; flex-direction: column; gap: 0.25rem; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 600; color: var(--gold);
+  }
+  .stat-label { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* ── MOVEMENT ── */
+  #movement {
+    background: var(--cream);
+    color: var(--charcoal);
+    padding: 7rem 4rem;
+  }
+  .section-label {
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::after { content: ''; display: block; width: 30px; height: 1px; background: var(--gold); }
+  .movement-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    align-items: center; max-width: 1100px; margin: 0 auto;
+  }
+  .movement-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 600; line-height: 1.15;
+    color: var(--navy);
+  }
+  .movement-headline em { color: var(--green); font-style: italic; }
+  .movement-body { font-size: 1rem; line-height: 1.85; color: #555; margin: 1.5rem 0; }
+  .movement-phrase {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-style: italic;
+    color: var(--navy); border-left: 3px solid var(--gold);
+    padding-left: 1.25rem; margin: 2rem 0;
+  }
+  .enemy-box {
+    background: var(--navy);
+    border-radius: 4px;
+    padding: 2.5rem;
+    color: var(--cream);
+  }
+  .enemy-title {
+    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+  }
+  .enemy-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 600; color: var(--cream);
+    margin-bottom: 1rem;
+  }
+  .enemy-desc { font-size: 0.9rem; line-height: 1.75; color: var(--text-muted); margin-bottom: 1.5rem; }
+  .enemy-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .enemy-list li {
+    font-size: 0.88rem; color: var(--text-muted);
+    display: flex; align-items: flex-start; gap: 0.75rem;
+  }
+  .enemy-list li::before { content: '—'; color: var(--gold); flex-shrink: 0; margin-top: 1px; }
+  .war-cry {
+    margin-top: 1.75rem; padding-top: 1.5rem;
+    border-top: 1px solid rgba(184,148,42,0.2);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem; font-style: italic; color: var(--gold-light);
+  }
+
+  /* ── LAWS ── */
+  #laws {
+    background: var(--navy);
+    padding: 7rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  #laws::before {
+    content: '15';
+    position: absolute; right: -2rem; top: 50%; transform: translateY(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30vw; font-weight: 700; color: rgba(184,148,42,0.04);
+    line-height: 1; pointer-events: none;
+  }
+  .laws-inner { max-width: 1100px; margin: 0 auto; }
+  .laws-header { text-align: center; margin-bottom: 4rem; }
+  .laws-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 600;
+    color: var(--cream); margin-top: 0.75rem;
+  }
+  .laws-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: rgba(184,148,42,0.1);
+    border: 1px solid rgba(184,148,42,0.1);
+  }
+  .law-item {
+    background: var(--navy-deep);
+    padding: 1.75rem 1.5rem;
+    transition: background 0.2s;
+    position: relative;
+  }
+  .law-item:hover { background: var(--navy-mid); }
+  .law-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem; font-weight: 600;
+    color: rgba(184,148,42,0.25); line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+  .law-text { font-size: 0.9rem; line-height: 1.7; color: var(--text-muted); }
+  .law-item:hover .law-text { color: var(--cream); }
+
+  /* ── OFFERS ── */
+  #offers {
+    background: var(--charcoal);
+    padding: 7rem 4rem;
+  }
+  .offers-inner { max-width: 1100px; margin: 0 auto; }
+  .offers-header { margin-bottom: 3.5rem; }
+  .offers-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 600;
+    color: var(--cream); margin-top: 0.75rem; max-width: 600px;
+  }
+  .offers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .offer-card {
+    background: var(--navy-deep);
+    border: 1px solid rgba(184,148,42,0.12);
+    border-radius: 4px; padding: 2.25rem;
+    display: flex; flex-direction: column;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  }
+  .offer-card:hover { transform: translateY(-4px); border-color: rgba(184,148,42,0.4); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+  .offer-card.featured { border-color: var(--gold); background: var(--navy-mid); }
+  .offer-badge {
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--navy-deep); background: var(--gold);
+    padding: 0.3rem 0.85rem; border-radius: 1px;
+    display: inline-block; margin-bottom: 1.25rem; align-self: flex-start;
+  }
+  .offer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 600; color: var(--cream);
+    margin-bottom: 0.5rem;
+  }
+  .offer-tagline { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.6; }
+  .offer-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem; font-weight: 600; color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+  .offer-price span { font-size: 1rem; color: var(--text-muted); font-family: 'Outfit', sans-serif; font-weight: 300; }
+  .offer-features { list-style: none; flex: 1; display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 2rem; }
+  .offer-features li { font-size: 0.87rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 0.75rem; }
+  .offer-features li::before { content: '→'; color: var(--gold); flex-shrink: 0; }
+  .offer-cta {
+    background: transparent; border: 1px solid rgba(184,148,42,0.35);
+    color: var(--cream); padding: 0.85rem;
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s; border-radius: 2px; text-align: center;
+    text-decoration: none; display: block;
+  }
+  .offer-cta:hover { background: var(--gold); color: var(--navy-deep); border-color: var(--gold); }
+  .offer-card.featured .offer-cta { background: var(--gold); color: var(--navy-deep); border-color: var(--gold); }
+  .offer-card.featured .offer-cta:hover { background: var(--gold-light); }
+
+  /* ── COHORT ── */
+  #cohort {
+    background: linear-gradient(160deg, var(--green) 0%, #0F3D24 100%);
+    padding: 7rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  #cohort::after {
+    content: '';
+    position: absolute; top: -50%; right: -20%;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,148,42,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cohort-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .cohort-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 600;
+    color: var(--cream); margin-top: 0.75rem; line-height: 1.2;
+  }
+  .cohort-body { font-size: 0.95rem; line-height: 1.8; color: rgba(245,240,232,0.75); margin: 1.5rem 0 2rem; }
+  .cohort-price-block {
+    background: rgba(8,24,41,0.4); border: 1px solid rgba(184,148,42,0.25);
+    border-radius: 4px; padding: 1.5rem;
+    display: inline-flex; flex-direction: column; gap: 0.4rem; margin-bottom: 2rem;
+  }
+  .cohort-price-label { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
+  .cohort-price-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 600; color: var(--cream); }
+  .cohort-price-plan { font-size: 0.82rem; color: rgba(245,240,232,0.55); }
+  .weeks-list { display: flex; flex-direction: column; gap: 0; }
+  .week-row {
+    display: grid; grid-template-columns: 56px 1fr;
+    border-bottom: 1px solid rgba(184,148,42,0.12);
+    padding: 1.1rem 0;
+    transition: background 0.15s;
+    cursor: default;
+  }
+  .week-row:first-child { border-top: 1px solid rgba(184,148,42,0.12); }
+  .week-row:hover { background: rgba(184,148,42,0.04); }
+  .week-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 600; color: rgba(184,148,42,0.4);
+    line-height: 1;
+  }
+  .week-content { display: flex; flex-direction: column; gap: 0.2rem; }
+  .week-title { font-size: 0.9rem; font-weight: 500; color: var(--cream); }
+  .week-desc { font-size: 0.8rem; color: rgba(245,240,232,0.5); line-height: 1.5; }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--cream); color: var(--charcoal);
+    padding: 7rem 4rem;
+  }
+  .about-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .about-badge {
+    display: inline-block;
+    background: var(--navy); color: var(--gold);
+    font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500;
+    padding: 0.5rem 1.25rem; border-radius: 2px; margin-bottom: 1.5rem;
+  }
+  .about-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 600;
+    color: var(--navy); line-height: 1.2; margin-bottom: 1.5rem;
+  }
+  .about-body { font-size: 0.95rem; line-height: 1.85; color: #555; margin-bottom: 1.25rem; }
+  .about-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-style: italic; color: var(--navy);
+    border-left: 3px solid var(--gold); padding-left: 1rem; margin: 2rem 0;
+  }
+  .about-visual {
+    background: var(--navy);
+    border-radius: 4px; padding: 3rem;
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+  .archetypes-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+  .archetype-bar { display: flex; flex-direction: column; gap: 0.5rem; }
+  .archetype-name { font-size: 0.85rem; color: var(--cream); display: flex; justify-content: space-between; }
+  .archetype-name span { color: var(--gold); }
+  .bar-track { height: 6px; background: rgba(184,148,42,0.15); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); animation: barGrow 1.5s ease both; }
+  @keyframes barGrow { from { width: 0 !important; } }
+  .pillars-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-top: 0.5rem; }
+  .pillars-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .pillar-chip {
+    background: rgba(184,148,42,0.08); border: 1px solid rgba(184,148,42,0.2);
+    border-radius: 2px; padding: 0.6rem 0.9rem;
+    font-size: 0.78rem; color: var(--text-muted);
+  }
+
+  /* ── CTA SECTION ── */
+  #cta {
+    background: var(--navy-deep);
+    padding: 7rem 4rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  #cta::before {
+    content: '';
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,148,42,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-eyebrow { font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+  .cta-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 600;
+    color: var(--cream); line-height: 1.1; margin-bottom: 1.5rem; position: relative;
+  }
+  .cta-headline em { color: var(--gold); font-style: italic; }
+  .cta-sub { font-size: 1rem; color: var(--text-muted); max-width: 480px; margin: 0 auto 3rem; line-height: 1.75; }
+  .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy-deep);
+    border-top: 1px solid rgba(184,148,42,0.12);
+    padding: 3rem 4rem;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+  }
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 600; color: var(--cream);
+  }
+  .footer-brand span { display: block; font-family: 'Outfit', sans-serif; font-size: 0.65rem; color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 400; margin-top: 2px; }
+  .footer-phrase {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 0.95rem; color: var(--gold-light); opacity: 0.8;
+  }
+  .footer-copy { font-size: 0.75rem; color: var(--text-muted); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    #hero, #movement, #laws, #offers, #cohort, #about, #cta, footer { padding: 5rem 1.5rem; }
+    .movement-grid, .cohort-inner, .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .offers-grid { grid-template-columns: 1fr; }
+    .laws-grid { grid-template-columns: 1fr 1fr; }
+    .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+    footer { flex-direction: column; text-align: center; }
+  }
+  @media (max-width: 560px) {
+    .laws-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Steward Leadership Group <span>Building Asset Builders</span></a>
+  <ul class="nav-links">
+    <li><a href="#movement">Our Mission</a></li>
+    <li><a href="#laws">15 Laws</a></li>
+    <li><a href="#offers">Work With Us</a></li>
+    <li><a href="#cohort">Cohort</a></li>
+    <li><a href="#about">About Kevin</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">Get Started</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-line"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Steward Leadership Group</div>
+    <h1 class="hero-headline">
+      Stop living as<br>a <em>consumer.</em><br>Start operating<br>as an <em>asset.</em>
+    </h1>
+    <p class="hero-subhead">Financial transformation starts with identity — not income. We help individuals, leaders, and faith communities move from consumer behavior to ownership behavior.</p>
+    <div class="hero-phrase">"Every dollar needs an assignment. Every person needs a strategy."</div>
+    <div class="hero-actions">
+      <a href="#cohort" class="btn-primary">Join the Asset Builder Cohort</a>
+      <a href="#offers" class="btn-outline">Explore Our Work</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="stat-num">8</div><div class="stat-label">Week Transformation</div></div>
+      <div class="stat-item"><div class="stat-num">15</div><div class="stat-label">Laws of Asset Identity</div></div>
+      <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Content Pillars</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MOVEMENT -->
+<section id="movement">
+  <div class="movement-grid">
+    <div class="reveal">
+      <div class="section-label">The Problem</div>
+      <h2 class="movement-headline">The real enemy is <em>financial drift.</em></h2>
+      <p class="movement-body">Most people were taught how to earn money. Almost no one was taught how to govern it. The result is financial drift — earning, spending, giving, and leading without assignment, ownership, or stewardship.</p>
+      <div class="movement-phrase">"Financial drift is not a money problem. It is a direction problem."</div>
+      <a href="#cta" class="btn-primary" style="margin-top:1rem;">Book Kevin to Speak</a>
+    </div>
+    <div class="reveal">
+      <div class="enemy-box">
+        <div class="enemy-title">Primary Enemy</div>
+        <div class="enemy-name">Financial Drift</div>
+        <div class="enemy-desc">What happens when people earn without governing. Financial drift shows up as:</div>
+        <ul class="enemy-list">
+          <li>Earning money but never governing it</li>
+          <li>Spending without assignment or direction</li>
+          <li>Confusing income with ownership</li>
+          <li>Letting appetite direct your dollars</li>
+          <li>Avoiding your numbers out of shame</li>
+          <li>Treating fundraising like begging</li>
+          <li>Delaying asset-building until "later"</li>
+        </ul>
+        <div class="war-cry">"No dollar without an assignment. No life without ownership."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LAWS -->
+<section id="laws">
+  <div class="laws-inner">
+    <div class="laws-header reveal">
+      <div class="section-label" style="justify-content:center;">The Foundation</div>
+      <h2 class="laws-headline">The 15 Laws of Asset Identity</h2>
+    </div>
+    <div class="laws-grid reveal">
+      <div class="law-item"><div class="law-num">01</div><div class="law-text">You are not broke because you lack income. You are broke because you lack ownership.</div></div>
+      <div class="law-item"><div class="law-num">02</div><div class="law-text">A consumer asks, "Can I afford this?" An owner asks, "Will this make me stronger?"</div></div>
+      <div class="law-item"><div class="law-num">03</div><div class="law-text">Money without identity will always return to old habits.</div></div>
+      <div class="law-item"><div class="law-num">04</div><div class="law-text">Financial literacy is not optional. It is adult survival.</div></div>
+      <div class="law-item"><div class="law-num">05</div><div class="law-text">The goal is not to look wealthy. The goal is to become structurally strong.</div></div>
+      <div class="law-item"><div class="law-num">06</div><div class="law-text">Income feeds the moment. Assets feed the future.</div></div>
+      <div class="law-item"><div class="law-num">07</div><div class="law-text">Stewardship means every dollar has an assignment.</div></div>
+      <div class="law-item"><div class="law-num">08</div><div class="law-text">If you do not direct your money, your appetites will.</div></div>
+      <div class="law-item"><div class="law-num">09</div><div class="law-text">A producer builds value before demanding reward.</div></div>
+      <div class="law-item"><div class="law-num">10</div><div class="law-text">Net worth is not just a number. It is evidence of decisions repeated over time.</div></div>
+      <div class="law-item"><div class="law-num">11</div><div class="law-text">Debt is not always evil, but ignorance with debt is dangerous.</div></div>
+      <div class="law-item"><div class="law-num">12</div><div class="law-text">Your gifts, knowledge, relationships, and discipline are all assets before money ever arrives.</div></div>
+      <div class="law-item"><div class="law-num">13</div><div class="law-text">Wealth starts within, but it must eventually show up in behavior, ownership, and structure.</div></div>
+      <div class="law-item"><div class="law-num">14</div><div class="law-text">Fundraising is not begging. Fundraising is transferring belief into resources.</div></div>
+      <div class="law-item"><div class="law-num">15</div><div class="law-text">The future belongs to people who know how to identify, develop, and deploy assets.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFERS -->
+<section id="offers">
+  <div class="offers-inner">
+    <div class="offers-header reveal">
+      <div class="section-label">Work With Us</div>
+      <h2 class="offers-headline">Three ways to bring Steward Leadership Group into your world</h2>
+    </div>
+    <div class="offers-grid">
+      <div class="offer-card reveal">
+        <div class="offer-name">Church Speaking</div>
+        <div class="offer-tagline">A financial stewardship experience for your congregation — from a single Sunday session to a full transformation series.</div>
+        <div class="offer-price">$1,500 <span>– $7,500</span></div>
+        <ul class="offer-features">
+          <li>Seed: single 60-min keynote — $1,500</li>
+          <li>Growth: 2-session series — $3,500</li>
+          <li>Transformation: 4-session series — $7,500</li>
+          <li>Pre-event pastor consultation included</li>
+          <li>Congregation workbook provided</li>
+          <li>Post-event follow-up resources</li>
+        </ul>
+        <a href="#cta" class="offer-cta">Book a Speaking Date</a>
+      </div>
+      <div class="offer-card featured reveal">
+        <div class="offer-badge">Flagship Offer</div>
+        <div class="offer-name">Asset Builder Cohort</div>
+        <div class="offer-tagline">An 8-week ownership identity and financial strategy program. This is not a budgeting course — it is a transformation experience.</div>
+        <div class="offer-price">$4,500 <span>/ person</span></div>
+        <ul class="offer-features">
+          <li>8 weekly live group sessions (90 min)</li>
+          <li>The Asset Builder Ledger — physical + digital</li>
+          <li>2 × private 1:1 coaching calls with Kevin</li>
+          <li>Private cohort community access</li>
+          <li>Asset Builder Certificate at graduation</li>
+          <li>Lifetime alumni network access</li>
+        </ul>
+        <a href="#cta" class="offer-cta">Apply for the Cohort</a>
+      </div>
+      <div class="offer-card reveal">
+        <div class="offer-name">1:1 Consulting</div>
+        <div class="offer-tagline">Private strategy sessions for pastors, nonprofit leaders, and professionals ready for a direct, structured approach to financial clarity.</div>
+        <div class="offer-price">$500 <span>/ hour</span></div>
+        <ul class="offer-features">
+          <li>Personal financial strategy sessions</li>
+          <li>Organizational stewardship consulting</li>
+          <li>Fundraising campaign strategy</li>
+          <li>Church financial leadership coaching</li>
+          <li>Institutional asset development planning</li>
+          <li>Available in 1hr, 3hr, or retainer packages</li>
+        </ul>
+        <a href="#cta" class="offer-cta">Book a Strategy Session</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COHORT -->
+<section id="cohort">
+  <div class="cohort-inner">
+    <div class="reveal">
+      <div class="section-label" style="color:var(--gold-light);">8-Week Program</div>
+      <h2 class="cohort-headline">The Asset Builder Cohort</h2>
+      <p class="cohort-body">Over 8 weeks, you will move from consumer identity to Asset Builder identity — building the beliefs, disciplines, language, and financial structures that produce lasting ownership behavior. Small group. Deep transformation.</p>
+      <div class="cohort-price-block">
+        <div class="cohort-price-label">Investment</div>
+        <div class="cohort-price-num">$4,500</div>
+        <div class="cohort-price-plan">Or 3 payments of $1,500 · Cohort size: 8–12 people</div>
+      </div>
+      <a href="#cta" class="btn-primary">Apply Now — Limited Spots</a>
+    </div>
+    <div class="reveal">
+      <div class="weeks-list">
+        <div class="week-row"><div class="week-num">01</div><div class="week-content"><div class="week-title">Identity Audit</div><div class="week-desc">Who have you been financially? Consumer vs owner · net worth baseline</div></div></div>
+        <div class="week-row"><div class="week-num">02</div><div class="week-content"><div class="week-title">Asset Inventory</div><div class="week-desc">What do you already have? Skills, relationships, discipline, knowledge</div></div></div>
+        <div class="week-row"><div class="week-num">03</div><div class="week-content"><div class="week-title">Dollar Assignment</div><div class="week-desc">Every dollar gets a mission · The Asset Builder Ledger</div></div></div>
+        <div class="week-row"><div class="week-num">04</div><div class="week-content"><div class="week-title">Debt Strategy</div><div class="week-desc">Govern it, don't fear it · Building while reducing</div></div></div>
+        <div class="week-row"><div class="week-num">05</div><div class="week-content"><div class="week-title">Investing Identity</div><div class="week-desc">Owners put money to work · Real estate, retirement, equity</div></div></div>
+        <div class="week-row"><div class="week-num">06</div><div class="week-content"><div class="week-title">Stewardship Leadership</div><div class="week-desc">Money and your influence · Fundraising as belief transfer</div></div></div>
+        <div class="week-row"><div class="week-num">07</div><div class="week-content"><div class="week-title">Ownership Map</div><div class="week-desc">Your personal 12-month asset plan · Decision filters</div></div></div>
+        <div class="week-row"><div class="week-num">08</div><div class="week-content"><div class="week-title">Graduation</div><div class="week-desc">Asset Builder Certificate · Alumni network · New identity declared</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="about-badge">Founder &amp; Stewardship Strategist</div>
+      <h2 class="about-headline">Kevin Andre Brooks</h2>
+      <p class="about-body">Most financial coaching teaches people what to do with money. Kevin works on something deeper — the identity behind the behavior. Because financial transformation almost always starts with who you believe you are before it ever shows up in what you do.</p>
+      <p class="about-body">As a coach, consultant, and educator, Kevin works at the intersection of financial literacy, identity transformation, and stewardship leadership — helping individuals, faith communities, and organizations move from consumer behavior to ownership behavior.</p>
+      <div class="about-title">"I am a Stewardship Strategist. I help people stop drifting financially, assign every dollar with purpose, and build the identity of an Asset Builder."</div>
+      <a href="#cta" class="btn-primary" style="margin-top:1.5rem;">Work With Kevin</a>
+    </div>
+    <div class="about-visual reveal">
+      <div class="archetypes-label">Brand Archetypes</div>
+      <div class="archetype-bar">
+        <div class="archetype-name">Sage — Truth, Education, Wisdom, Clarity <span>70%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:70%"></div></div>
+      </div>
+      <div class="archetype-bar">
+        <div class="archetype-name">Ruler — Ownership, Discipline, Authority <span>30%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:30%"></div></div>
+      </div>
+      <div class="pillars-label" style="margin-top:1rem;">Content Pillars</div>
+      <div class="pillars-grid">
+        <div class="pillar-chip">Asset Identity</div>
+        <div class="pillar-chip">Money Literacy</div>
+        <div class="pillar-chip">Stewardship Leadership</div>
+        <div class="pillar-chip">Fundraising Power</div>
+        <div class="pillar-chip">Ownership Stories</div>
+        <div class="pillar-chip">Financial Drift</div>
+      </div>
+      <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid rgba(184,148,42,0.15);">
+        <div class="archetypes-label">Serves</div>
+        <div style="display:flex; flex-direction:column; gap:0.5rem; margin-top:0.75rem;">
+          <div style="font-size:0.85rem; color:var(--text-muted); display:flex; align-items:center; gap:0.6rem;"><span style="color:var(--gold);">→</span> Faith communities &amp; churches</div>
+          <div style="font-size:0.85rem; color:var(--text-muted); display:flex; align-items:center; gap:0.6rem;"><span style="color:var(--gold);">→</span> Nonprofit &amp; institutional leaders</div>
+          <div style="font-size:0.85rem; color:var(--text-muted); display:flex; align-items:center; gap:0.6rem;"><span style="color:var(--gold);">→</span> Professionals &amp; entrepreneurs</div>
+          <div style="font-size:0.85rem; color:var(--text-muted); display:flex; align-items:center; gap:0.6rem;"><span style="color:var(--gold);">→</span> Corporate &amp; university audiences</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-eyebrow">Your Next Step</div>
+  <h2 class="cta-headline">Ready to stop <em>consuming</em><br>and start <em>building?</em></h2>
+  <p class="cta-sub">Whether you're an individual ready for transformation, a pastor who wants to serve your congregation, or a leader who needs financial clarity — we have a path for you.</p>
+  <div class="cta-actions">
+    <a href="mailto:kevin@stewardleadershipgroup.com" class="btn-primary">Book a Strategy Session</a>
+    <a href="#cohort" class="btn-outline">Join the Cohort</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Steward Leadership Group <span>Building Asset Builders · stewardleadershipgroup.com</span></div>
+  <div class="footer-phrase">"No dollar without an assignment. No life without ownership."</div>
+  <div class="footer-copy">© 2026 Steward Leadership Group · Founded by Kevin Andre Brooks</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').style.padding = window.scrollY > 50 ? '0.9rem 4rem' : '1.25rem 4rem';
+  });
+</script>
+</body>
+</html>
